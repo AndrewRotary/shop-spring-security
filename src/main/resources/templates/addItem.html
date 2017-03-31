@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/headering" th:remove="tag"></head>
+<body>
+
+<ul th:include="/nav" th:remove="tag"></ul>
+<div class="container jumbotron">
+    <form th:action="@{/addItem}" method="post" th:object="${item}" commandName="addItem" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="">Category: </label>
+            <select th:field="*{category}" class="select-student">
+                <option th:each="c : ${category}" th:text="${c.name}"
+                        th:value="${c.id}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Name: </label>
+            <input type="text" class="form-control" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label>Description: </label>
+            <textarea type="text" class="form-control" th:field="*{description}"/>
+        </div>
+        <div class="form-group">
+            <label>Price: </label>
+            <input type="text" class="form-control" th:field="*{price}"/>
+        </div>
+        <div class="">
+            <span>Upload new Picture</span>
+            <input type="file" value="Upload Student image" th:field="*{imageMultipart}" name="file"
+                   class="upload" multiple="multiple"/>
+        </div>
+        <input type="submit" value="Add" class="btn-student mt-25"/>
+    </form>
+</div>
+</body>
+</html>

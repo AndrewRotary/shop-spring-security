@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/headering" th:remove="tag"></head>
+<body>
+
+<ul th:include="/nav" th:remove="tag"></ul>
+<div class="container jumbotron">
+    <form th:action="@{/register}" method="post" th:object="${user}" commandName="addUser" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Username </label>
+            <input type="text" class="form-control" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label>Password: </label>
+            <input type="password" class="form-control" th:field="*{password}"/>
+        </div>
+        <div class="fileUpload btn-student col-xs-6">
+            <span>Picture</span>
+            <input type="file" value="Upload user image" th:field="*{imageMultipart}" name="file"
+                   class="upload"/>
+        </div>
+        <input type="submit" value="Register" class="btn btn-info"/>
+    </form>
+</div>
+</body>
+</html>

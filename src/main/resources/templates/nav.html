@@ -1,0 +1,31 @@
+<nav class="navbar navbar-default" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+           <a class="navbar-brand" th:href="@{/}">Brand</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/addItem}">Add Item</a></li>
+            <li><a th:href="@{/cart}">Cart</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <div th:with="condition=${#httpServletRequest.remoteUser}" th:remove="tag">
+                <div th:if="${condition}" th:remove="tag">
+                    <li><img style="border-radius: 50px;" height="45" width="45" th:src="${'/images/'+ #authentication.principal.path}" /></li>
+                    <li><a th:inline="text">Hello <span sec:authentication="name"></span></a>
+                    </li>
+
+                    <li>
+                        <form class="navbar-form navbar-left" th:action="@{/logout}" method="post">
+                            <button  class="btn btn-default" type="submit" value="Sign Out">Sign Out</button>
+                        </form>
+                    </li>
+                </div>
+                <div th:unless="${condition}" th:remove="tag">
+                    <li class="active"><a th:href="@{/register}">Register</a></li>
+                    <li><a th:href="@{/login}">Login</a></li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</nav>
